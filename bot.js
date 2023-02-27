@@ -1,12 +1,13 @@
 const { Telegraf, session, Scenes } = require('telegraf')
-const { start, help, roadmapCommand, feedbackCommand, introductionInlineAction, ordersInlineAction, testnetsInlineAction, arbitrageInlineAction, usefulInlineAction, faqInlineAction } = require('./controllers/commands')
-const { on_roadmap_command, on_introduction_action, on_orders_action, on_testnets_action, on_arbitrage_action, on_useful_action, on_faq_action, on_feedback_command } = require('./utils/constants')
+const { start, help, roadmapCommand, checkCommand, feedbackCommand, introductionInlineAction, ordersInlineAction, testnetsInlineAction, arbitrageInlineAction, usefulInlineAction, faqInlineAction } = require('./controllers/commands')
+const { on_roadmap_command, on_introduction_action, on_orders_action, on_testnets_action, on_arbitrage_action, on_useful_action, on_faq_action, on_feedback_command, on_check_command } = require('./utils/constants')
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const feedbackScene = require('./controllers/scenes/feedback')
+const checkScene = require('./controllers/scenes/check')
 
-const stage = new Scenes.Stage([feedbackScene])
+const stage = new Scenes.Stage([feedbackScene, checkScene])
 
 const setupBot = () => {
     bot.use(session())
@@ -17,6 +18,7 @@ const setupBot = () => {
 
     bot.command(on_roadmap_command.id, roadmapCommand)
     bot.command(on_feedback_command.id, feedbackCommand)
+    bot.command(on_check_command.id, checkCommand)
 
     bot.action(on_introduction_action.id, introductionInlineAction)
     bot.action(on_orders_action.id, ordersInlineAction)

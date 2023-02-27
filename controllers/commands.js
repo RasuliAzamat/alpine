@@ -9,6 +9,7 @@ const help = async ctx => await ctx.replyWithHTML(on_help_command.replyText)
 
 const roadmapCommand = async ctx => await ctx.replyWithHTML(on_roadmap_command.replyText, { ...roadmap_inline_buttons })
 const feedbackCommand = async ctx => await ctx.scene.enter('feedbackSceneWizard')
+const checkCommand = async ctx => await ctx.scene.enter('checkSceneWizard')
 
 const introductionInlineAction = async ctx => {
     await ctx.answerCbQuery()
@@ -39,6 +40,7 @@ module.exports = {
     start,
     help,
     roadmapCommand,
+    checkCommand,
     feedbackCommand,
     introductionInlineAction,
     ordersInlineAction,
